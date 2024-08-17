@@ -1,0 +1,6 @@
+type CaptchaRequirement = record { is_alpha_numeric : bool; char_count : nat8 };
+type SolveCaptchaArgs = record { id : nat; ans : text };
+service : () -> {
+  generate_captcha : (CaptchaRequirement) -> (nat, text);
+  solve_captcha : (SolveCaptchaArgs) -> (bool) query;
+}
