@@ -1,0 +1,10 @@
+node_modules
+dist
+
+target
+.dfx
+.git
+
+# Mac OSX temporary files
+.DS_Store
+**/.DS_Store
