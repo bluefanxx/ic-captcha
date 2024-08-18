@@ -1,0 +1,28 @@
+{
+  "name": "ic-captcha demo",
+  "version": "0.0.0",
+  "description": "Demo of an Onchain Captcha Service built on ICP",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "solid-devtools": "^0.29.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-plugin-solid": "^2.8.2"
+  },
+  "dependencies": {
+    "@dfinity/agent": "^2.0.0",
+    "@dfinity/candid": "^2.0.0",
+    "@dfinity/principal": "^2.0.0",
+    "dotenv": "^16.4.5",
+    "process": "^0.11.10",
+    "solid-icons": "^1.1.0",
+    "solid-js": "^1.8.11",
+    "vite-plugin-environment": "^1.1.3"
+  }
+}
