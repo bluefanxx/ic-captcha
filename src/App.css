@@ -1,0 +1,156 @@
+.captcha-demo {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #191b1f;
+  color: #ffffff;
+}
+
+.captcha-demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #2a2d35;
+}
+
+.captcha-demo-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.captcha-demo-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.captcha-demo-icon {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.captcha-demo-icon:hover {
+  opacity: 0.7;
+}
+
+.captcha-demo-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  text-align: center;
+}
+
+.captcha-demo-description {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.captcha-demo-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.captcha-demo-setting {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.captcha-demo-setting label {
+  margin-right: 10px;
+}
+
+.captcha-demo-button-wrapper {
+  display: inline-block;
+  margin: 20px 0;
+}
+
+.captcha-demo-generate {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+}
+
+.captcha-demo-generate:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.captcha-demo-generate:active {
+  transform: translateY(0);
+}
+
+.captcha-demo-generate:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.captcha-demo-captcha {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.captcha-demo-captcha img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.captcha-demo-input {
+  display: flex;
+  gap: 10px;
+}
+
+.captcha-demo-input input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.captcha-demo-input button {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.captcha-demo-input button:hover {
+  background-color: #007a9e;
+}
+
+@media (max-width: 480px) {
+  .captcha-demo-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .captcha-demo-icons {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+
+  .captcha-demo-input {
+    flex-direction: column;
+  }
+}

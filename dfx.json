@@ -1,9 +1,13 @@
 {
   "canisters": {
-    "captcha_generator": {
-      "candid": "src/backend/backend.did",
+    "backend": {
+      "candid": "canisters/backend/backend.did",
       "package": "backend",
       "type": "rust"
+    },
+    "frontend": {
+      "source": ["dist"],
+      "type": "assets"
     }
   },
   "defaults": {
@@ -15,4 +19,3 @@
   "output_env_file": ".env",
   "version": 1
 }
-
