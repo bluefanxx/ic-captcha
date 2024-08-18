@@ -1,5 +1,3 @@
-use std::ops::RangeBounds;
-
 use candid::CandidType;
 use rand::Rng;
 use serde::Deserialize;
@@ -23,23 +21,30 @@ pub fn generate_text(
     }
     let mut word = String::new();
     if is_alpha_numeric {
-        for _ in 0..char_count {
+        for i in 0..char_count {
+            ic_cdk::println!("loop index: {i}");
             let is_numeric_flag = random_value::gen_bool();
+            ic_cdk::println!("boolean generated: {is_numeric_flag}");
             if is_numeric_flag {
                 let generated_value: u8 = mutate_rng(|rng| rng.gen_range(0..=9));
+                ic_cdk::println!("value generated: {generated_value}");
                 word = format!("{word}{generated_value}");
             } else {
                 let is_capital = random_value::gen_bool();
                 let (from, to) = if is_capital { (65, 91) } else { (97, 123) };
                 let generated_value: u8 = mutate_rng(|rng| rng.gen_range(from..to));
+                ic_cdk::println!("value generated: {generated_value}");
                 word.push(generated_value as char);
             }
         }
     } else {
-        for _ in 0..char_count {
+        for i in 0..char_count {
+            ic_cdk::println!("loop index: {i}");
             let is_capital = random_value::gen_bool();
+            ic_cdk::println!("value generated: {is_capital}");
             let (from, to) = if is_capital { (65, 91) } else { (97, 123) };
             let generated_value: u8 = mutate_rng(|rng| rng.gen_range(from..to));
+            ic_cdk::println!("value generated: {generated_value}");
             word.push(generated_value as char);
         }
     }

@@ -29,18 +29,39 @@ impl Storable for BoundedNat {
         Decode!(&bytes, Self).unwrap()
     }
 
+    const BOUND: Bound = Bound::Bounded {
+        max_size: 100,
+        is_fixed_size: false,
+    };
+}
+
+#[derive(CandidType, Deserialize, Debug)]
+pub struct CaptchaDetail {
+    pub ans: String,
+    pub image: String,
+}
+
+impl Storable for CaptchaDetail {
+    fn to_bytes(&self) -> std::borrow::Cow<[u8]> {
+        std::borrow::Cow::Owned(Encode!(self).unwrap())
+    }
+
+    fn from_bytes(bytes: std::borrow::Cow<[u8]>) -> Self {
+        Decode!(&bytes, Self).unwrap()
+    }
+
     const BOUND: Bound = Bound::Unbounded;
 }
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
 
-fn default_captcha_map() -> StableBTreeMap<BoundedNat, (String, String), Memory> {
+fn default_captcha_map() -> StableBTreeMap<BoundedNat, CaptchaDetail, Memory> {
     StableBTreeMap::init(MEMORY_MANAGER.with_borrow(|m| m.get(MemoryId::new(1))))
 }
 
 struct CaptchaState {
     count: Nat,
-    captchas: StableBTreeMap<BoundedNat, (String, String), Memory>, // Value: (String, String) -> (Captcha Text, Captcha Image in URI format)
+    captchas: StableBTreeMap<BoundedNat, CaptchaDetail, Memory>,
 }
 
 impl CaptchaState {
@@ -104,14 +125,18 @@ pub fn generate_captcha(arg: CaptchaRequirement) -> (Nat, String) {
         text: &text,
         x: 50,
         y: 100,
-        font_size: 24.0,
+        font_size: 60.0,
         color: [0, 0, 0], // black color
     }]);
     mutate_captcha_state(|state| {
         let id = BoundedNat(state.get_id());
-        state
-            .captchas
-            .insert(id.clone(), (text.clone(), image.clone()));
+        state.captchas.insert(
+            id.clone(),
+            CaptchaDetail {
+                ans: text.clone(),
+                image: image.clone(),
+            },
+        );
         (id.0, image.clone())
     })
 }
@@ -125,11 +150,11 @@ pub struct SolveCaptchaArgs {
 #[query]
 pub fn solve_captcha(arg: SolveCaptchaArgs) -> bool {
     read_captcha_state(|state| {
-        let (text, _) = match state.captchas.get(&BoundedNat(arg.id)) {
+        let CaptchaDetail { ans, image: _ } = match state.captchas.get(&BoundedNat(arg.id)) {
             None => ic_cdk::trap("Invalid Captch Id"),
             Some(v) => v,
         };
-        text.to_ascii_lowercase() == arg.ans.to_ascii_lowercase()
+        ans.to_ascii_lowercase() == arg.ans.to_ascii_lowercase()
     })
 }
 

@@ -3,7 +3,7 @@ use image::{ImageBuffer, Rgb, RgbImage};
 use rusttype::{Font, Point, Scale};
 use std::io::Cursor;
 
-const FONT_BYTES: &[u8] = &[];
+const FONT_BYTES: &[u8] = std::include_bytes!("./../../../Pixeled.ttf");
 
 pub struct TextOverlay<'a> {
     pub text: &'a str,
